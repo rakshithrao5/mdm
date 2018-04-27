@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist
+PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+       "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>EmailAccountDescription</key>
+			<string>MEEM MAIL ACC</string>
+			<key>EmailAccountName</key>
+			<string>Vignesh P</string>
+			<key>EmailAccountType</key>
+			<string>EmailTypeIMAP</string>
+			<key>EmailAddress</key>
+			<string>vigneswaran@meemmemory.com</string>
+			<key>IncomingMailServerAuthentication</key>
+			<string>EmailAuthNone</string>
+			<key>IncomingMailServerHostName</key>
+			<string>imap.gmail.com</string>
+			<key>IncomingMailServerPortNumber</key>
+			<integer>993</integer>
+			<key>IncomingMailServerUseSSL</key>
+			<true/>
+			<key>IncomingMailServerUsername</key>
+			<string>vigneswaran@meemmemory.com</string>
+			<key>OutgoingMailServerAuthentication</key>
+			<string>EmailAuthNone</string>
+			<key>OutgoingMailServerHostName</key>
+			<string>smtp.gmail.com  </string>
+			<key>OutgoingMailServerPortNumber</key>
+			<integer>465</integer>
+			<key>OutgoingMailServerUseSSL</key>
+			<true/>
+			<key>OutgoingMailServerUsername</key>
+			<string>vigneswaran@meemmemory.com</string>
+			<key>OutgoingPasswordSameAsIncomingPassword</key>
+			<true/>
+			<key>PayloadDescription</key>
+			<string>Configures Email settings</string>
+			<key>PayloadDisplayName</key>
+			<string>MEEM MAIL ACC</string>
+			<key>PayloadIdentifier</key>
+			<string>com.apple.mail.managed.7181B285-8377-48DF-AD50-E2C59479050A</string>
+			<key>PayloadType</key>
+			<string>com.apple.mail.managed</string>
+			<key>PayloadUUID</key>
+			<string>7181B285-8377-48DF-AD50-E2C59479050A</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+			<key>PreventMove</key>
+			<true/>
+			<key>SMIMEEnablePerMessageSwitch</key>
+			<false/>
+			<key>SMIMEEnabled</key>
+			<false/>
+			<key>SMIMEEncryptionEnabled</key>
+			<false/>
+			<key>SMIMESigningEnabled</key>
+			<false/>
+			<key>allowMailDrop</key>
+			<false/>
+			<key>disableMailRecentsSyncing</key>
+			<true/>
+		</dict>
+	</array>
+	<key>PayloadDisplayName</key>
+	<string>EmailProfile</string>
+	<key>PayloadIdentifier</key>
+	<string>com.apple.applicationaccess.example</string>
+	<key>PayloadOrganization</key>
+	<string>Meem pvt ltd</string>
+	<key>PayloadRemovalDisallowed</key>
+	<false/>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>D6B2474D-A8AF-4668-AA74-358C7250B2FF</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>plist</key>
+    <dict>
+      <key>$</key>
+      <dict>
+        <key>version</key>
+        <string>1.0</string>
+      </dict>
+      <key>dict</key>
+      <dict>
+        <key>key</key>
+        <array>
+          <string>Status</string>
+          <string>UDID</string>
+        </array>
+        <key>string</key>
+        <array>
+          <string>Idle</string>
+          <string>c71ca7053c54b81940b5e3e5186f24935c34b3e4</string>
+        </array>
+      </dict>
+    </dict>
+  </dict>
+</plist>
