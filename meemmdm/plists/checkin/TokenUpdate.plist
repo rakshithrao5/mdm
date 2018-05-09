@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>plist</key>
+    <dict>
+      <key>$</key>
+      <dict>
+        <key>version</key>
+        <string>1.0</string>
+      </dict>
+      <key>dict</key>
+      <dict>
+        <key>key</key>
+        <array>
+          <string>AwaitingConfiguration</string>
+          <string>MessageType</string>
+          <string>PushMagic</string>
+          <string>Token</string>
+          <string>Topic</string>
+          <string>UDID</string>
+          <string>UnlockToken</string>
+        </array>
+        <key>false</key>
+        <string/>
+        <key>string</key>
+        <array>
+          <string>TokenUpdate</string>
+          <string>6C6FE904-BD3B-462F-A24B-168C384315A2</string>
+          <string>com.apple.mgmt.External.7395b548-33a0-4cb4-8db0-db595b2451b6</string>
+          <string>a193696b7fe6e52e5783928c8c3f6c63a1926088</string>
+        </array>
+        <key>data</key>
+        <array>
+          <string>fym9ThUEDtOThjJIRYCy0E239PY7qdbM3Dpn02IJypw=</string>
+          <string>REFUQQAABORWRVJTAAAABAAAAARUWVBFAAAABAAAAAJVVUlEAAAAEASo7FLkj0wFpnMP IqDqUO1ITUNLAAAAKM5YW7VuWp9ATX3R3bPSDJxqvQxL2r0yuQbNt1ZpYqihszMgT6r3 6NRXUkFQAAAABAAAAAFTQUxUAAAAFHWePQU+k2rB0sOCbRXPsCE2GPMeSVRFUgAAAAQA AMNQVVVJRAAAABA6HNvVw3FIFJKEiSc/b9XGQ0xBUwAAAAQAAAALV1JBUAAAAAQAAAAB S1RZUAAAAAQAAAAAV1BLWQAAACBsHqd1EFt+uNvSBRo7/5xWRwRGIlcUM6991cBwYdKs 8lVVSUQAAAAQEFRBTxGiTNG4mvdKxkXTgUNMQVMAAAAEAAAACldSQVAAAAAEAAAAA0tU WVAAAAAEAAAAAFdQS1kAAAAog/8HnqwXgIX0LaDliuOnSbjguM8AaCkOAJEozQjQsfar HiJdJt7rzlVVSUQAAAAQio0qxO1KR8OaPhcRsMlw20NMQVMAAAAEAAAACVdSQVAAAAAE AAAAA0tUWVAAAAAEAAAAAFdQS1kAAAAoeNs2YYirDVV4Lo1syteSkCpVe52YSLacyV51 32PMZJ1lzOlCf5fQQ1VVSUQAAAAQhn+35qoWTo+rdzNw0YDvkUNMQVMAAAAEAAAACFdS QVAAAAAEAAAAAUtUWVAAAAAEAAAAAFdQS1kAAAAgj2pmythq5KJq9RVZ3MfODWeRpyJF Czz+w3O7Isd0cgxVVUlEAAAAEJxjT5hYE05Fv6qoJGg33RJDTEFTAAAABAAAAAdXUkFQ AAAABAAAAANLVFlQAAAABAAAAABXUEtZAAAAKCen4jm9efUA4MsV3wPShr/KZyn0bvUF Ykp3Ho/xDcF43oF/fL4iIApVVUlEAAAAECN+FUob7EG+o/JOBQxuPv5DTEFTAAAABAAA AAZXUkFQAAAABAAAAANLVFlQAAAABAAAAABXUEtZAAAAKApmUWL6JDmEDOnqfhhtDzkx SvNzI63a6IbOL++zpcyqT1sbCwCJobNVVUlEAAAAEKdgLjwVi0gOkl0p/KqaU3VDTEFT AAAABAAAAAVXUkFQAAAABAAAAANLVFlQAAAABAAAAABXUEtZAAAAKPEB2AnyzpbsNEpT 90RqB64TZTPM+dNaC8+JN6VBI72O6ys5VQWvd19VVUlEAAAAEPPzRzIu/UWxjaMaDlXn frFDTEFTAAAABAAAAANXUkFQAAAABAAAAANLVFlQAAAABAAAAABXUEtZAAAAKKiQ+xwy TjwWLfA2NsWrxppXQ9OwJccVyGTmKUTIsBiN4SuTvD7AA/FVVUlEAAAAEB5bsXh07Urx hjFMFhPQuVZDTEFTAAAABAAAAAJXUkFQAAAABAAAAANLVFlQAAAABAAAAAFXUEtZAAAA KGbGkyo6gJEVhhNForz2nfLFjmF73Unz0eIhv2c7K/4i6lGy6MfSv09QQktZAAAAIG5b KRiqze1JJ8Bws1xjDAl+1nomzqEU+wCyrEJzhDp2VVVJRAAAABAU1WcE+g1FxYi1MpGm +gDpQ0xBUwAAAAQAAAABV1JBUAAAAAQAAAADS1RZUAAAAAQAAAAAV1BLWQAAACiC7uTQ HGgnNGucBx/ToB8OAlgy+CsOZrNtr2CcugzSm6audrlcF7NHU0lHTgAAABTv8WfBMP+y d+FFQwQGoIstqEr9QA==</string>
+        </array>
+      </dict>
+    </dict>
+  </dict>
+</plist>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Email Profile</h1>
+
+<p>Profile Name <input type="text" id="profileName" name="" value="My Email Profile"/></p>
+<p>Email Account Description<input type="text" id="EmailAccountDescription" name="EmailAccountDescription"/></p>
+  <p>Account Display <input type="text" id="AccountDisplay" name="AccountDisplay"/></p>
+
+  <p>Account Type
+    <select id="accountType">
+    	<option value="EmailTypeIMAP">IMAP
+    	<option value="EmailTypePOP">POP
+	</select>
+  </p>
+  
+    <p>Path Prefix <input type="text" id="pathprefix" name="pathprefix"/></p>  
+    
+    <p>Sender Name <input type="text" id="senderName" name="senderName"/>
+                <label>Note: type email ID </label>
+    </p>
+    
+        <p>Sender E-Mail Address <input type="text" id="senderEmail" name="senderEmail"/>
+            <label>Note: type email ID </label>
+        </p>
+          
+    <p>Prevent Moving Messages to other Mail Accounts
+    <select id="preventMovingMsgMailAcc">
+    	<option value=false>No
+    	<option value=true>Yes
+	</select>
+  </p>
+    <p>Disable recent mail address sync
+    <select id="disableRecentMailSync">
+    	<option value=false>No
+    	<option value=true>Yes
+	</select>
+  </p>
+<hr>
+<h2>Incoming Mail </h2>
+
+ <p>Mail Server 
+ <input type="text" id="incmgMailserver" name="incmgMailserver"/>
+ </p>
+ 
+  <p>Port 
+ <input type="text" id="incmgMailserverPort" name="incmgMailserverPort"/>
+ </p>
+ 
+  <p>User Name
+ <input type="text" id="incmgMailserverUsrName" name="incmgMailserverUsrName"/>
+ <label>Note: type email ID </label>
+ </p>
+ 
+   <p>Authentication Type	 
+     <select id="incmgMailserverAthuType">
+    	<option value="EmailAuthNone">None
+	</select>
+ </p>
+ 
+    <p>Use SSL for mail communication	
+    <select id="incmgMailserverSsl">
+    	<option value=true>Yes
+    	<option value=false>No
+	</select>
+  </p>
+
+
+<hr>
+<h2>Outgoing Mail </h2>
+
+ <p>Mail Server 
+ <input type="text" id="outgoingMailserver" name="outgoingMailserver"/>
+ </p>
+ 
+  <p>Port 
+ <input type="text" id="outgoingMailserverPort" name="outgoingMailserverPort"/>
+ </p>
+ 
+  <p>User Name
+ <input type="text" id="outgoingMailserverUsrName" name="outgoingMailserverUsrName"/>
+ <label>Note: type email ID </label>
+ </p>
+ 
+   <p>Authentication Type	 
+     <select id="outgoingMailserverAthuType">
+    	<option value="EmailAuthNone">None
+	</select>
+ </p>
+ 
+    <p>Use SSL for mail communication	
+    <select id="outgoingMailserverSsl">
+    	<option value=true>Yes
+    	<option value=false>No
+	</select>
+  </p>
+
+    <p>Use Outgoing Password Same as Incoming	
+    <select id="outgoingIncomingMailserverSamePass">
+    	<option value=true>Yes
+    	<option value=false>No
+	</select>
+  </p>
+  
+  
+      <p>Block Account usage from non-Mail Apps
+    <select id="blockAccUsgFrmNonMailApps">
+    	<option value=false>No
+    	<option value=true>Yes
+	</select>
+  </p>
+  
+      <p>Enable S/MIME to encrypt or decrypt Mails	
+    <select id="enableCrypto">
+    	<option value=false>No
+    	<option value=true>Yes
+	</select>
+  </p>
+
+
+
+<p><button  onclick="sendEmailAccDetails()">Submit</button></p>
+
+
+
+  <script>
+    function sendEmailAccDetails() {
+    
+
+        var eamilPylaodversion = 1;
+        var profilePylaodversion = 1;
+        var profilename = document.getElementById("profileName").value;
+        var emailAccDesc = document.getElementById("EmailAccountDescription").value;
+        var accDisp = document.getElementById("AccountDisplay").value;
+        var accType = document.getElementById("accountType").value;
+        var pathPrefix = document.getElementById("pathprefix").value;
+        var senderName = document.getElementById("senderName").value;
+        var senderEmail = document.getElementById("senderEmail").value;
+        var mvMails = document.getElementById("preventMovingMsgMailAcc").value;
+        var disableSync = document.getElementById("disableRecentMailSync").value;
+      
+      
+     var incmgMailserver =document.getElementById("incmgMailserver").value;
+     var incmgPort = document.getElementById("incmgMailserverPort").value;
+     var incmgusrName = document.getElementById("incmgMailserverUsrName").value;
+     var incmgAuthType = document.getElementById("incmgMailserverAthuType").value;
+     var incmgAuthSsl =  document.getElementById("incmgMailserverSsl").value;
+
+     var outgoingMailserver = document.getElementById("outgoingMailserver").value;
+     var outgoingPort = document.getElementById("outgoingMailserverPort").value;
+     var outgoingUsrName = document.getElementById("outgoingMailserverUsrName").value;
+     var outgoingAuthType = document.getElementById("outgoingMailserverAthuType").value;
+     var outgoingSsl = document.getElementById("outgoingMailserverSsl").value;
+     var samePass = document.getElementById("outgoingIncomingMailserverSamePass").value;
+     var blockNonMailapps = document.getElementById("blockAccUsgFrmNonMailApps").value;
+     var enableCrypto = document.getElementById("enableCrypto").value;
+
+
+    xhr = new XMLHttpRequest();
+    var url = "/meem/device/apple/profiles/email";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.onreadystatechange = function () { 
+        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+            
+            alert(xhr.responseText);
+        }
+        else if (xhr.readyState == XMLHttpRequest.DONE) {
+            alert(xhr.responseText);
+        }
+    }
+
+    var tokenID =sessionStorage.getItem("token", tokenID);
+
+    var data = JSON.stringify({
+        "tokenID": tokenID,
+        "profielName" : profilename,  
+        "org" : "Meem Memory pvt ltd",   
+        "eamilPayloadVer" : eamilPylaodversion,
+        "profilePayloadVer" : profilePylaodversion, 
+        "EmailAccountDescription" : emailAccDesc,
+        "AccountDisplay":accDisp,
+        "accountType":accType,
+        "pathprefix":pathPrefix,
+        "senderName":senderName,
+        "senderEmail":senderEmail,
+        "preventMovingMsgMailAcc":mvMails,
+        "disableRecentMailSync":disableSync,
+
+        "incoming":{
+            "mailServer": incmgMailserver,
+            "port": incmgPort,
+            "userName": incmgusrName,
+            "authType": incmgAuthType,
+            "ssl": incmgAuthSsl
+        },
+        "outgoing":{
+            "mailServer" : outgoingMailserver,
+            "port" : outgoingPort,
+            "userName" : outgoingUsrName,
+            "authType" : outgoingAuthType,
+            "ssl" :outgoingSsl,
+            "outgoingIncomingMailserverSamePass" : samePass,
+            "blockAccUsgFrmNonMailApps" : blockNonMailapps,
+            "enableCrypto" : enableCrypto
+        }      
+    });
+
+    xhr.send(data);
+
+
+  }
+  </script>
+
+
+
+
+</body>
+</html> 

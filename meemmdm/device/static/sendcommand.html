@@ -1,0 +1,76 @@
+<!doctype html>
+<html ng-app>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+  </head>
+  <body>
+
+
+<h2>Select MDM Command</h2>
+
+  <select id="command">
+    <!-- <option value="deviceinfo" type="text">Get Device Information</option> -->
+    <option value="devicelock" type="text">Lock Device</option>
+    <!-- <option value="erasedevice" type="text">Erase Device</option>
+    <option value="clearpasscode" type="text">Clear Passcode</option>
+    <option value="certificatelist" type="text">List Certificates</option>
+    <option value="provisioningprofilelist" type="text">List Provisioning Profiles</option>
+    <option value="installedapplicationlist" type="text">List Installed Applications</option>
+    <option value="managedapplicationlist" type="text">List Managed Applications</option>    
+    <option value="profilelist" type="text">List Profiles</option>
+    <option value="provisioningprofilelist" type="text">List Provisioning Profiles</option>
+    <option value="restrictions" type="text">List Restrictions</option>
+    <option value="securityinfo" type="text">Get Security Info</option> -->
+    <option value="installmyapplication" type="text">Install Custom Application</option>
+    <option value="removeapplication" type="text">Remove Custom Application</option>
+    
+  </select>
+  
+  <p><button  onclick="sendMDMCommand()">Send</button></p>
+
+
+
+<div class="add-info">
+  <span class="rightfloat">
+    <span class="red">
+      <span id="display">
+
+      </span>
+      </span>
+  </span>
+</div>
+    
+
+<script>
+
+function sendMDMCommand() {
+
+      var tokenID =sessionStorage.getItem("token", tokenID);
+      var command = document.getElementById("command").value;
+        
+      xhttp = new XMLHttpRequest();
+      var url = "/meem/device/apple/profiles/command";
+      xhttp.open("POST", url, true);
+      xhttp.setRequestHeader("Content-type", "application/json");
+      xhttp.onreadystatechange = function () { 
+          if (xhttp.readyState == XMLHttpRequest.DONE && xhttp.status == 200) {
+              
+              alert(xhttp.responseText);
+          }
+          else if (xhttp.readyState == XMLHttpRequest.DONE) {
+              alert(xhttp.responseText);
+          }
+      }
+
+      var data = JSON.stringify({
+          "tokenID": tokenID,
+          "command" : command,  
+      });
+
+      xhttp.send(data);
+
+}
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>plist</key>
+    <dict>
+      <key>$</key>
+      <dict>
+        <key>version</key>
+        <string>1.0</string>
+      </dict>
+      <key>dict</key>
+      <dict>
+        <key>key</key>
+        <array>
+          <string>BuildVersion</string>
+          <string>IMEI</string>
+          <string>MEID</string>
+          <string>MessageType</string>
+          <string>OSVersion</string>
+          <string>ProductName</string>
+          <string>SerialNumber</string>
+          <string>Topic</string>
+          <string>UDID</string>
+        </array>
+        <key>string</key>
+        <array>
+          <string>14G60</string>
+          <string>35 204507 538117 7</string>
+          <string>35204507538117</string>
+          <string>Authenticate</string>
+          <string>10.3.3</string>
+          <string>iPhone7,1</string>
+          <string>FK1PRRSPG5QQ</string>
+          <string>com.apple.mgmt.External.7395b548-33a0-4cb4-8db0-db595b2451b6</string>
+          <string>a193696b7fe6e52e5783928c8c3f6c63a1926088</string>
+        </array>
+      </dict>
+    </dict>
+  </dict>
+</plist>

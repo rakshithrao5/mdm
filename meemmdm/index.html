@@ -1,0 +1,43 @@
+<!doctype html>
+<html ng-app>
+  
+  <head>
+  <title>ServiceStack Send Complex Form (Synchronously)</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <style>
+      label { display: inline-block; width: 100px; text-align: right; margin-right: 20px; }
+  </style>
+  </head>
+  <body></body>
+
+
+<form method="get" id="theForm" action="/meem/auth/sign-in">
+    <p><button type="submit"  >Login</button></p>
+
+</form>
+<form method="get" id="theForm" action="/meem/auth/sign-up">
+    <p><button type="submit"  >New User</button></p>
+</form>
+
+
+  <!-- <body onload="getStatus()">
+
+      <form method="get" id="theForm" action="/meem?">
+          <input type="hidden" id='tokenID' name="tokenID" >
+      </form>
+    
+      <script>
+
+      function getStatus() {
+
+        sessionStorage.setItem("token", "123");
+        document.getElementById("tokenID").value = sessionStorage.getItem("token");
+        document.getElementById('theForm').submit();
+      }
+      </script>
+
+  </body> -->
+  
+
+
+</html>
