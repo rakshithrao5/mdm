@@ -22,7 +22,7 @@ var profileSchema = new mongoose.Schema({
     deviceLinked:{
         type: mongoose.Schema.Types.ObjectId, ref:'device'
     }
-});
+}, {strict: false});
 
 var Profile = mongoose.model('profile', profileSchema);
 module.exports = Profile;

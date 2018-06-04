@@ -1,10 +1,8 @@
 var mongoose = require('mongoose')
 
 var certificateSchema = new mongoose.Schema({
-	adminKeyEmail:{
-		type:String,
-		unique:true,
-		required:true
+	admin:{
+		type: mongoose.Schema.Types.ObjectId, ref:'User'
 	},
 	apnCert: Buffer,
 	apnKey: Buffer,

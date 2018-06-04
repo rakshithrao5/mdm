@@ -17,8 +17,8 @@ var userSchema = new mongoose.Schema({
 	salt:String,
 	authID:String,
 	orgIdHash:String,
-	deviceArray: {type : mongoose.Schema.ObjectId, ref:'device'},
-	profileArray:  {type : mongoose.Schema.ObjectId, ref:'profile'}
+	deviceArray: [{type : mongoose.Schema.ObjectId, ref:'device'}],
+	profileArray:  [{type : mongoose.Schema.ObjectId, ref:'profile'}]
 });
 
 /*

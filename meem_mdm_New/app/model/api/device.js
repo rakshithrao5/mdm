@@ -1,5 +1,6 @@
 var Device = require('../schema/devicesDB')
 var authentication = require('../api/authentication')
+let User = require('app/model/schema/authDB');
 
 // module.exports.saveKeyEmail = function (email) {
 //     var deviceObj = new Device();
@@ -45,9 +46,21 @@ module.exports.saveAuthenticationDetail = function (hash, authDetails, cb) {
                 console.log('Error while saving ' + err);
             else {
                 console.log('SUCCESSFULY stored')
-                cb();
             }
         });
+
+        User.findById(Id, function (err, user) {
+            user.deviceArray.push(device);
+
+            user.save(function (err) {
+                if (err)
+                    console.log('Error while saving ' + err);
+                else {
+                    console.log('SUCCESSFULY stored')
+                    cb();
+                }
+            });
+        })
     })
 };
 
@@ -72,57 +85,61 @@ module.exports.saveTokenUpdate = function (hash, tokenUpdateArg, cb) {
     })
 };
 
-module.exports.listdevices = function (cb) {
+module.exports.listdevices = function (tokenId, cb) {
 
     var deviceArray = [];
 
-    //console.log('111')
-    Device.find({}, 'deviceList', function (err, deviceList) {
+    authentication.fetchIdByTokenId(tokenId, function(Id){
 
-        //console.log(JSON.stringify(deviceList[0].deviceList))
-        if (err)
-            console.log('Error getting device list')
-        else if (deviceList[0].deviceList === null) {
-            console.log('NULL object')
-        } else {
+        console.log(Id)
+        Device.find({'admin':Id}, function (err, deviceList) {
 
-            deviceList[0].deviceList.forEach(function (list) {
-
-                var json = {
-                    "devices": {
-                        "deviceid": list.device.deviceID,
-                        "Device": {
-                            "name": 'Some_dummy_name',
-                            "OSversion": list.device.authentication.osVersion,
-                            "platform": 'IOS',
-                            "buildversion": list.device.authentication.buildVersion,
-                            "model": list.device.authentication.productName,
-                            "modelname": list.device.authentication.productName,
-                            "productname": list.device.authentication.productName,
-                            "udid": list.device.authentication.UDID,
-                            "imei": list.device.authentication.IMEI,
-                            "serialnumber": list.device.authentication.serialNumber,
-                            "devicecapacity": '12GB',
-                            "freespace": '2GB',
-                            "batterylevel": '17'
-                        },
-                        "Network": {
-                            "bluetoothMAC": 'AB:CD:EF:AB:CD:EF',
-                            "WiFiMAC": 'AB:CD:EF:AB:CD:EF',
-                            "IPaddress": '192.168.0.8',
-                            "WifiSSD": 'ABCDEF'
+            console.log(JSON.stringify(deviceList))
+            if (err)
+                console.log('Error getting device list')
+            else if (!deviceList) {
+                console.log('NULL object')
+            } else {
+    
+                deviceList.forEach(function (list) {
+    
+                    var json = {
+                        "devices": {
+                            "deviceid": list.deviceId,
+                            "Device": {
+                                "name": 'Some_dummy_name',
+                                "OSversion": list.authentication.OSVersion,
+                                "platform": 'IOS',
+                                "buildversion": list.authentication.BuildVersion,
+                                "model": list.authentication.ProductName,
+                                "modelname": list.authentication.ProductName,
+                                "productname": list.authentication.ProductName,
+                                "udid": list.authentication.UDID,
+                                "imei": list.authentication.IMEI,
+                                "serialnumber": list.authentication.SerialNumber,
+                                "devicecapacity": '12GB',
+                                "freespace": '2GB',
+                                "batterylevel": '17'
+                            },
+                            "Network": {
+                                "bluetoothMAC": 'AB:CD:EF:AB:CD:EF',
+                                "WiFiMAC": 'AB:CD:EF:AB:CD:EF',
+                                "IPaddress": '192.168.0.8',
+                                "WifiSSD": 'ABCDEF'
+                            }
                         }
-                    }
-                };
-
-                //console.log(JSON.stringify(json))
-
-                deviceArray.push(json)
-            })
-        }
-
-        cb(deviceArray);
+                    };
+    
+                    //console.log(JSON.stringify(json))
+    
+                    deviceArray.push(json)
+                })
+            }
+    
+            cb(deviceArray);
+        })
     })
+    
 }
 
 exports.linkProfileToDevice = function () {
@@ -133,7 +150,7 @@ exports.linkProfileToDevice = function () {
 module.exports.getTokenByDevId = function (tokenId, devId, tokenCB) {
 
     // Device.find({'adminKeyEmail': email, 'deviceList.device.deviceID': devId}, 'deviceList.device.tokenUpdate.Token deviceList.device.tokenUpdate.PushMagic', function (err, token) {
-    Device.find({ 'deviceId': devId}, 'tokenUpdate.Token tokenUpdate.PushMagic', function (err, token) {
+    Device.findOne({ 'deviceId': devId }, function (err, token) {
 
         if (err) {
             console.log('Error while fetcing token')
@@ -143,7 +160,7 @@ module.exports.getTokenByDevId = function (tokenId, devId, tokenCB) {
             console.log("Device Token: " + JSON.stringify(token));
 
             //  console.log('*** '+token[0].deviceList[0].device.tokenUpdate.token+'   '+token[0].deviceList[0].device.tokenUpdate.pushMagic);
-            //tokenCB(token[0].deviceList[0].device.tokenUpdate.Token, token[0].deviceList[0].device.tokenUpdate.PushMagic);
+            tokenCB(token.tokenUpdate.Token, token.tokenUpdate.PushMagic);
         }
     });
 }

@@ -173,7 +173,7 @@ exports.DeployProfile = function (req, res) {
     var profileUUID = uuidv1();
 
 
-    Profile.getProfiles(tokenID, profileName, function (profileInfo, emailpayload, passcodepayload, webclippayload,restrictionpayload) {
+    Profile.getProfiles(tokenID, profileName, function (profileInfo, emailpayload, passcodepayload, webclippayload,certificatepayload,managedWebDomainpayload, restrictionpayload) {
 
 
         var totalPayloadContent = new Array;
@@ -192,7 +192,14 @@ exports.DeployProfile = function (req, res) {
             totalPayloadContent.push(webclippayload.PayloadContent);
 
         }
-        
+        if (certificatepayload){
+            console.log("certificate paylod present")
+            totalPayloadContent.push(certificatepayload.PayloadContent);
+        }
+        if (managedWebDomainpayload){
+            console.log("managedWebDomain paylod present")
+            totalPayloadContent.push(managedWebDomainpayload.PayloadContent);
+        }
 
         if (restrictionpayload) {
 
@@ -200,11 +207,15 @@ exports.DeployProfile = function (req, res) {
 
             CreateRestrictionJson(restrictionpayload, function (restrictionJson) {
 
-
+                console.log('1');
                 totalPayloadContent.push(restrictionJson);
                 // console.log("Got: "+  JSON.stringify (restrictionJson));
+                console.log('2');
 
                 if (profileInfo) {
+
+                    console.log('3');
+
                     var profileIdentifier = profileInfo.profileidentifier;
 
                     profileIdentifier["PayloadContent"] = totalPayloadContent;
@@ -214,6 +225,8 @@ exports.DeployProfile = function (req, res) {
                     var installprofile = new InstallProfile(req, res, profileIdentifier);
                     installprofile.push();
                     NotifyAPNS.notify(req, res);
+                    console.log('4');
+
                 }
 
                 res.end();
@@ -271,9 +284,11 @@ exports.DeleteProfile = function (req, res) {
 
 function CreateRestrictionJson(restrictionpayload, cb) {
 
-    var defaultRestrictions = restrictionpayload.defaultRestrictions.PayloadContent;
+    var defaultRestrictions = restrictionpayload.default.PayloadContent;
+    console.log('1');
 
     if (restrictionpayload.functionality) {
+        console.log('1');
 
         console.log("Functinality paylod present")
         var devicefunctionality = restrictionpayload.functionality.PayloadContent;
@@ -285,6 +300,8 @@ function CreateRestrictionJson(restrictionpayload, cb) {
         })
     }
     if (restrictionpayload.security) {
+        console.log('1');
+
         console.log("Security paylod present")
 
         /**Security */
@@ -297,6 +314,8 @@ function CreateRestrictionJson(restrictionpayload, cb) {
         })
     }
     if (restrictionpayload.advancedSecurity) {
+        console.log('1');
+
         console.log("AdvancedSecurity paylod present")
 
         /**Advanced Security */
@@ -346,6 +365,44 @@ function CreateRestrictionJson(restrictionpayload, cb) {
             defaultRestrictions[item] = network[item];
         })
     }
+    //TODO: rakshith 
+
+    if (restrictionpayload.contentRating) {
+        
+        console.log("content rating paylod ")
+        var rating = restrictionpayload.contentRating.PayloadContent;
+
+        keys = Object.keys(rating);
+        keys.forEach(function (key) {
+            // console.log("Key: " + key);
+            defaultRestrictions[key] = rating[key];
+        })
+    }
+
+    if (restrictionpayload.privacy) {
+        
+        console.log("privacy paylod ")
+        var privacy = restrictionpayload.privacy.PayloadContent;
+
+        keys = Object.keys(privacy);
+        keys.forEach(function (key) {
+            // console.log("Key: " + key);
+            defaultRestrictions[key] = privacy[key];
+        })
+    }
+
+    if (restrictionpayload.applications) {
+        
+        console.log("applications paylod ")
+        var applications = restrictionpayload.applications.PayloadContent;
+
+        keys = Object.keys(applications);
+        keys.forEach(function (key) {
+            // console.log("Key: " + key);
+            defaultRestrictions[key] = applications[key];
+        })
+    }
+
     
     cb(defaultRestrictions);
 

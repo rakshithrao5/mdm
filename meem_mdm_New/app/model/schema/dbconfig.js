@@ -3,7 +3,7 @@ require('rootpath')();
 var winston = require('config/logconfig/winston');
 var log = winston.getLogger(null);
 var gracefulShutdown;
-var dbURI = 'mongodb://localhost/meemgdpr';
+var dbURI = 'mongodb://localhost/dummy';
 
 log.debug("Mongoose DB ");
 mongoose.connect(process.env.CUSTOMCONNSTR_MongolabUri

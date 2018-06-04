@@ -120,9 +120,7 @@ function signEnrollMobileConfig(error, stdout, stderr) {
     } else {
         //signed mobileconfig
         console.log("token ID ",tokenID);
-        authentication.fetchEmailByHash(emailHash, function (email) {
-            certificate.addMobileConfig(email, fs.readFileSync(signedenrollmobileconfigPath))
-        })
+            certificate.addMobileConfig(emailHash, fs.readFileSync(signedenrollmobileconfigPath))
         // TODO : call enrollmobile config save to DB from reading the file signedenrollmobileconfigPath
         onFinish(true);
     }
@@ -138,8 +136,6 @@ function gen_enroll_mobileconfig() {
     var identityCerUUID = uuidv1();
     var pauloadUUID_accessrights = uuidv1();
     var pauloadUUID_configuration = uuidv1();
-
-
 
     var serverurl ;
     var checkinurl ;

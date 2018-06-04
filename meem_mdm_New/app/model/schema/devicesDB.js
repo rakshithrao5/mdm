@@ -29,7 +29,7 @@ var deviceSchema = new mongoose.Schema({
     }
 });
 
-var Device = mongoose.model('Device', deviceSchema);
+var Device = mongoose.model('device', deviceSchema);
 module.exports = Device;
 
 

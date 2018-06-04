@@ -5,8 +5,8 @@ module.exports = Object.freeze({
     MICROSOFT_AZURE :false,
     LOCAL_SERVER:true,
     LOCAL :{
-        SERVERURL:"https://192.168.0.51:8080",
-        CHECKINURL:"https://192.168.0.51:8080",
+        SERVERURL:"https://192.168.0.51:3000",
+        CHECKINURL:"https://192.168.0.51:3000",
         IDENTITYPASSWD:"test123"
     },
     AZURE : {

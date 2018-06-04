@@ -25,10 +25,7 @@ exports.notify = function (req, res) {
     }
     console.log("Notify Device Token: " + devicetoken.toString('base64'));
 
-    authentication.fetchEmailByTokenId(tokenID, function (email) {
-      console.log("Email: " + email);
-
-      certificate.getAPNCert(email, function (cert) {
+      certificate.getAPNCert(tokenID, function (cert) {
         console.log("cert: " + cert);
 
 
@@ -42,6 +39,7 @@ exports.notify = function (req, res) {
 
         var note = new apn.Notification();
 
+        console.log('1')
         let apnProvider = new apn.Provider({
           key: cert.apnKey,
           cert: cert.apnCert,
@@ -59,7 +57,6 @@ exports.notify = function (req, res) {
           console.log(result.failed);
         });
       });
-    });
   });
 }
 

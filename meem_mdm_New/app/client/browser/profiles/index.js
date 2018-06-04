@@ -27,6 +27,8 @@ router.use('/passcode',passcode.ManagePasscodeProfile);
 router.use('/passcode',wifi.WifiProfile);
 router.use('/webshortcuts',webshortcuts.ManageWebShortcuts);
 router.use('/managedwebdomains',webDomain.ManageWebDomain);
+router.use('/certificate',certificates.ManageCertificatePofile);
+router.use('/managedwebdomains',managedwebDomain.ManageWebdomainsProfile);
 
 
 module.exports = router;

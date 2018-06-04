@@ -28,7 +28,7 @@
         <key>AccessRights</key>
         <integer>8191</integer>
         <key>CheckInURL</key>
-        <string>https://192.168.0.51:8080/meem/mdm/apple/checkin?id=e9626eb76b15bef3570a62c1dc8cc0de49e3c96ca2e5d448713274231d6dea58</string>
+        <string>https://192.168.0.51:3000/meem/mdm/apple/checkin?id=e9626eb76b15bef3570a62c1dc8cc0de49e3c96ca2e5d448713274231d6dea58</string>
         <key>CheckOutWhenRemoved</key>
         <false/>
         <key>IdentityCertificateUUID</key>
@@ -46,7 +46,7 @@
         <key>PayloadVersion</key>
         <integer>1</integer>
         <key>ServerURL</key>
-        <string>https://192.168.0.51:8080/meem/mdm/apple/server?id=e9626eb76b15bef3570a62c1dc8cc0de49e3c96ca2e5d448713274231d6dea58</string>
+        <string>https://192.168.0.51:3000/meem/mdm/apple/server?id=e9626eb76b15bef3570a62c1dc8cc0de49e3c96ca2e5d448713274231d6dea58</string>
         <key>SignMessage</key>
         <false/>
         <key>Topic</key>

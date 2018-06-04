@@ -290,16 +290,13 @@ module.exports.fetchEmailByTokenId = function(tokenID, email){
     })
 }
 
-module.exports.fetchEmailByHash = function(hash, email) {
-    User.findOne({orgIdHash : hash}, 'email', function(err, emailObj){
+module.exports.fetchEmailByHash = function(hash, onFetch) {
+    User.findOne({orgIdHash : hash}, '_id', function(err, idObj){
         if(err){
             console.log('Error in getting email ID by TOKEN');
         }
-        console.log('GOT THE MOBILE ID')
-        ret = JSON.stringify(emailObj);
-        myObj = JSON.parse(ret);
-        console.log(ret);
-        email(emailObj.email);
+        console.log('GOT THE MOBILE ID');
+        onFetch(idObj._id);
     })
 }
 
@@ -362,3 +359,57 @@ module.exports.deregisterAdmin = function (email) {
         }
     })
 }
+
+// module.exports.listdevices = function (tokenId, cb) {
+
+//     var deviceArray = [];
+
+//     console.log('111')
+//     User.findOne({'authID': tokenId}, 'deviceArray').populate('deviceArray').exec(function (err, deviceList) {
+
+//         //console.log(JSON.stringify(deviceList))
+//         if (err)
+//             console.log('Error getting device list '+err)
+//         else if (!deviceList) {
+//             console.log('NULL object')
+//         } else {
+
+//             console.log(JSON.stringify(deviceList))
+//             // deviceList[0].deviceList.forEach(function (list) {
+
+//             //     var json = {
+//             //         "devices": {
+//             //             "deviceid": list.device.deviceID,
+//             //             "Device": {
+//             //                 "name": 'Some_dummy_name',
+//             //                 "OSversion": list.device.authentication.osVersion,
+//             //                 "platform": 'IOS',
+//             //                 "buildversion": list.device.authentication.buildVersion,
+//             //                 "model": list.device.authentication.productName,
+//             //                 "modelname": list.device.authentication.productName,
+//             //                 "productname": list.device.authentication.productName,
+//             //                 "udid": list.device.authentication.UDID,
+//             //                 "imei": list.device.authentication.IMEI,
+//             //                 "serialnumber": list.device.authentication.serialNumber,
+//             //                 "devicecapacity": '12GB',
+//             //                 "freespace": '2GB',
+//             //                 "batterylevel": '17'
+//             //             },
+//             //             "Network": {
+//             //                 "bluetoothMAC": 'AB:CD:EF:AB:CD:EF',
+//             //                 "WiFiMAC": 'AB:CD:EF:AB:CD:EF',
+//             //                 "IPaddress": '192.168.0.8',
+//             //                 "WifiSSD": 'ABCDEF'
+//             //             }
+//             //         }
+//             //     };
+
+//             //     //console.log(JSON.stringify(json))
+
+//             //     deviceArray.push(json)
+//             // })
+//         }
+
+//         cb(deviceArray);
+//     }) 
+// }

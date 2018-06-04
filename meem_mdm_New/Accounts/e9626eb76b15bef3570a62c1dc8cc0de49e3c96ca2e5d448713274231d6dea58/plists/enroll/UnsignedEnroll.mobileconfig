@@ -28,7 +28,7 @@
         <key>AccessRights</key>
         <integer>8191</integer>
         <key>CheckInURL</key>
-        <string>https://192.168.0.51:8080/meem/mdm/checkin</string>
+        <string>https://www.codeswallop.com/meem/mdm/checkin</string>
         <key>CheckOutWhenRemoved</key>
         <false/>
         <key>IdentityCertificateUUID</key>
@@ -46,7 +46,7 @@
         <key>PayloadVersion</key>
         <integer>1</integer>
         <key>ServerURL</key>
-        <string>https://192.168.0.51:8080/meem/mdm/server</string>
+        <string>https://www.codeswallop.com/meem/mdm/server</string>
         <key>SignMessage</key>
         <false/>
         <key>Topic</key>

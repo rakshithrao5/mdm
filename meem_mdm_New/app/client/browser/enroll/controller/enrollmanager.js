@@ -117,7 +117,7 @@ exports.ListDevices = function (req, res) {
 
     console.log('List Enrolled Devices');
 
-    device.listdevices(function (deviceList) {
+    device.listdevices(req.query.tokenID, function (deviceList) {
         console.log('The device list is sent')
 
         res.status(200);
@@ -244,25 +244,23 @@ exports.onPushCsrUploadCompleted = function (req, res) {
         console.log("apnscerPath: " + apnscerPath);
         console.log("apnskeyPath: " + apnskeyPath);
 
-        authentication.fetchEmailByTokenId(tokenID, function (email) {
+        certificate.saveAPNCert(tokenID, fs.readFileSync(apnskeyPath), fs.readFileSync(currUploadPath), function () {
 
-            certificate.saveAPNCert(email, fs.readFileSync(apnscerPath), fs.readFileSync(apnskeyPath), function () {
+            var onEnrollMobileConfigGeneration = function (status) {
+                if (status) {
+                    console.log("******* Enroll mobile config Generated ******* ");
+                    res.end('File is uploaded. iOS Enroll link:http://www.codeswallop.com/meem/device/enroll')
 
-                var onEnrollMobileConfigGeneration = function (status) {
-                    if (status) {
-                        console.log("******* Enroll mobile config Generated ******* ");
-                        res.end('File is uploaded. iOS Enroll link:http://www.codeswallop.com/meem/device/enroll')
+                } else {
 
-                    } else {
+                    console.log("Enroll mobile config generation failed");
+                    res.end('File is uploaded, iOS Enroll generation failed')
 
-                        console.log("Enroll mobile config generation failed");
-                        res.end('File is uploaded, iOS Enroll generation failed')
-
-                    }
                 }
-                genenrollmobileconfig.entrypoint(tokenID, hash, onEnrollMobileConfigGeneration);
-            });
-        })
+            }
+            genenrollmobileconfig.entrypoint(tokenID, hash, onEnrollMobileConfigGeneration);
+        });
+
     })
 
 }

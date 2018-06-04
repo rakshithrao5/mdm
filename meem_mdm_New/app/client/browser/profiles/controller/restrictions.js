@@ -32,7 +32,7 @@ exports.ManageRestrictionProfile = function (req, res) {
                 }
         }
 
-        Profile.setRestrictionProfileFunctionality(tokenID, restrctionProfileName, functionalityJson);
+        Profile.setFunctionality(tokenID, restrctionProfileName, functionalityJson);
 
     }
     else if (type == "security") {
@@ -51,7 +51,7 @@ exports.ManageRestrictionProfile = function (req, res) {
                 }
 
         }
-        Profile.setRestrictionProfileSecurity(tokenID, restrctionProfileName, securityJson);
+        Profile.setSecurity(tokenID, restrctionProfileName, securityJson);
     }
     else if (type == "advancedsecurity") {
 
@@ -65,7 +65,7 @@ exports.ManageRestrictionProfile = function (req, res) {
                     "forceWatchWristDetection": req.body.forceWatchWristDetection 
                 }
         }
-        Profile.setRestrictionProfileAdvancedSecurity(tokenID, restrctionProfileName, advancedSecurityJson);
+        Profile.setAdvancedSecurity(tokenID, restrctionProfileName, advancedSecurityJson);
 
     }
     else if (type == "icloud") {
@@ -120,6 +120,48 @@ exports.ManageRestrictionProfile = function (req, res) {
         console.log("networkJson Json: " + JSON.stringify(networkJson));
         Profile.setNetworkProfile(tokenID, restrctionProfileName, networkJson)
 
+    }
+
+  else if(type == "contentrating"){
+        console.log('Adding Content  Rating');
+
+        var contentratingJson = {
+            "PayloadContent": {
+                "ratingRegion": req.body.ratingRegion,
+            }
+        }
+        console.log("contentrating Json: " + JSON.stringify(contentratingJson));
+        Profile.setContentratingProfile(tokenID, restrctionProfileName, contentratingJson)
+    }
+
+    else if(type == "privacy"){
+        console.log('Adding privacy  ');
+
+        var privacy = {
+            "PayloadContent": {
+                "allowDiagnosticSubmission": req.body.allowDiagnosticSubmission,
+                "forceLimitAdTracking": req.body.forceLimitAdTracking,
+                "allowLockScreenSettings": req.body.allowLockScreenSettings,
+                "allowLockScreenControlCenter": req.body.allowLockScreenControlCenter,
+                "allowLockScreenNotificationsView": req.body.allowLockScreenNotificationsView,
+                "allowLockScreenTodayView": req.body.allowLockScreenTodayView
+            }
+        }
+        console.log("privacy Json: " + JSON.stringify(privacy));
+        Profile.setPrivacyProfile(tokenID, restrctionProfileName, privacy)
+    }
+
+    else if(type == "applications"){
+        console.log('Adding applications  ');
+
+        var applications = {
+            "PayloadContent": {
+                "allowInAppPurchases": req.body.allowInAppPurchases,
+                "allowiTunes": req.body.allowiTunes
+            }
+        }
+        console.log("privacy Json: " + JSON.stringify(applications));
+        Profile.setApplicationsProfile(tokenID, restrctionProfileName, applications)
     }
 
     res.sendStatus(200);

@@ -21,8 +21,10 @@ module.exports.createProfile = function (tokenID, profileInfo, cb) {
     authentication.fetchIdByTokenId(tokenID, function (Id) {
 
 
-        var profile = new Profile({'profileInfo': profileInfo,
-                                    'admin': Id});
+        var profile = new Profile({
+            'profileInfo': profileInfo,
+            'admin': Id
+        });
 
         profile.save(function (err) {
             if (err) {
@@ -46,7 +48,7 @@ module.exports.updateProfile = function (tokenID, profileInfo) {
     }
 
     authentication.fetchIdByTokenId(tokenID, function (Id) {
-        Profile.findOne({ 'profileInfo.profilename': profileInfo.profileoldname, 'admin': Id},
+        Profile.findOne({ 'profileInfo.profilename': profileInfo.profileoldname, 'admin': Id },
             function (err, profile) {
 
                 profile.profileInfo = json;
@@ -63,7 +65,7 @@ module.exports.updateProfile = function (tokenID, profileInfo) {
 
 module.exports.deleteProfile = function (tokenID, profilename) {
     authentication.fetchIdByTokenId(tokenID, function (Id) {
-        Profile.findOne({ 'profileInfo.profilename': profilename, 'admin': Id},
+        Profile.findOne({ 'profileInfo.profilename': profilename, 'admin': Id },
             function (err, profile) {
 
                 profile.remove();
@@ -78,27 +80,29 @@ module.exports.deleteProfile = function (tokenID, profilename) {
     })
 }
 
-module.exports.setEmailProfile = function (tokenID, profilename, emailProfile) {
+var setProfile = function(tokenID, profilename, setQuery){
+    authentication.fetchIdByTokenId(tokenID, function (Id) {
+        Profile.findOneAndUpdate({ 'admin': Id, 'profileInfo.profilename': profilename }, { '$set': { 'emailProfile': emailProfile1 } },
+            //{ upsert: true, new: true },
+            function (err, profile) {
+                console.log(JSON.stringify(profile));
 
-    authentication.fetchEmailByTokenId(tokenID, function (email) {
-        Profile.findOne({ 'adminKeyEmail': email, 'profileArray.profileInfo.profilename': profilename }, function (err, profile) {
-            if (err) {
-                console.log('The error while fetching ' + err)
-            }
-            if (profile.profileArray[0]) {
-                //console.log('The device onject is not null in tokenUpdates');
-                profile.profileArray[0].setEmailProfile(emailProfile);
+                if (err) {
+                    console.log('The error while fetching ' + err)
+                }
 
                 profile.save(function (err) {
                     if (err)
-                        console.log('Error while saving emailProfile ' + err);
+                        console.log('Error while saving Profile ' + err);
                     else {
-                        console.log('emailProfile stored')
-                    }
-                });
-            }
+                        console.log('Profile stored')
+                }
+            });
         })
     })
+}
+module.exports.setEmailProfile = function (tokenID, profilename, emailProfile) {
+    setProfile({ 'emailProfile': emailProfile })
 }
 
 module.exports.setPasscodeProfile = function (tokenID, profilename, passcodeProfile) {
@@ -126,111 +130,195 @@ module.exports.setPasscodeProfile = function (tokenID, profilename, passcodeProf
 
 module.exports.setRestrictionProfileDefault = function (tokenID, profilename, restrictionProfileDefault) {
 
-    authentication.fetchEmailByTokenId(tokenID, function (email) {
+    authentication.fetchIdByTokenId(tokenID, function (Id) {
 
-        console.log('Email: ' + email + '    ' + profilename);
-        Profile.findOne({ 'adminKeyEmail': email, 'profileArray.profileInfo.profilename': profilename }, function (err, profile) {
+        //console.log('Email: ' + email + '    ' + profilename);
+        Profile.findOneAndUpdate({ 'admin': Id, 'profileInfo.profilename': profilename }, 
+                                    {'$set':{'restrictionProfile.default':restrictionProfileDefault}},
+                                     function (err, profile) {
             if (err) {
                 console.log('The error while fetching ' + err)
             }
-            if (profile.profileArray[0]) {
-
-                console.log('setRestrictionProfileDefault, profile: ' + JSON.stringify(profile));
-                profile.profileArray[0].setRestrictionProfileDefault(restrictionProfileDefault);
-
-                profile.save(function (err) {
-                    if (err)
-                        console.log('Error while saving restrictionProfile ' + err);
-                    else {
-                        console.log('restrictionProfile SUCCESSFULY stored')
-                    }
-                });
-            }
+            profile.save(function (err) {
+                if (err)
+                    console.log('Error while saving restrictionProfile ' + err);
+                else {
+                    console.log('restrictionProfile SUCCESSFULY stored')
+                }
+            });
         })
     })
 }
-
 
 module.exports.setRestrictionProfileFunctionality = function (tokenID, profilename, restrictionProfileFunctionality) {
 
-    authentication.fetchEmailByTokenId(tokenID, function (email) {
-        Profile.findOne({ 'adminKeyEmail': email, 'profileArray.profileInfo.profilename': profilename }, function (err, profile) {
+    authentication.fetchIdByTokenId(tokenID, function (Id) {
+
+        //console.log('Email: ' + email + '    ' + profilename);
+        Profile.findOneAndUpdate({ 'admin': Id, 'profileInfo.profilename': profilename }, 
+                                    {'$set':{'restrictionProfile.functionality':restrictionProfileFunctionality}},
+                                     function (err, profile) {
             if (err) {
                 console.log('The error while fetching ' + err)
             }
-            if (profile.profileArray[0]) {
-                //console.log('The device onject is not null in tokenUpdates');
-                profile.profileArray[0].setRestrictionProfileFunctionality(restrictionProfileFunctionality);
-
-                profile.save(function (err) {
-                    if (err)
-                        console.log('Error while saving restrictionProfile ' + err);
-                    else {
-                        console.log('restrictionProfile SUCCESSFULY stored')
-                    }
-                });
-            }
+            profile.save(function (err) {
+                if (err)
+                    console.log('Error while saving restrictionProfile ' + err);
+                else {
+                    console.log('restrictionProfile SUCCESSFULY stored')
+                }
+            });
         })
     })
 }
+
 module.exports.setRestrictionProfileSecurity = function (tokenID, profilename, restrictionProfileSecurity) {
 
-    authentication.fetchEmailByTokenId(tokenID, function (email) {
-        Profile.findOne({ 'adminKeyEmail': email, 'profileArray.profileInfo.profilename': profilename }, function (err, profile) {
+    authentication.fetchIdByTokenId(tokenID, function (Id) {
+
+        //console.log('Email: ' + email + '    ' + profilename);
+        Profile.findOneAndUpdate({ 'admin': Id, 'profileInfo.profilename': profilename }, 
+                                    {'$set':{'restrictionProfile.security':restrictionProfileSecurity}},
+                                     function (err, profile) {
             if (err) {
                 console.log('The error while fetching ' + err)
             }
-            if (profile.profileArray[0]) {
-                //console.log('The device onject is not null in tokenUpdates');
-                profile.profileArray[0].setRestrictionProfileSecurity(restrictionProfileSecurity);
-
-                profile.save(function (err) {
-                    if (err)
-                        console.log('Error while saving restrictionProfile ' + err);
-                    else {
-                        console.log('restrictionProfile SUCCESSFULY stored')
-                    }
-                });
-            }
+            profile.save(function (err) {
+                if (err)
+                    console.log('Error while saving restrictionProfile ' + err);
+                else {
+                    console.log('restrictionProfile SUCCESSFULY stored')
+                }
+            });
         })
     })
 }
 
 module.exports.setRestrictionProfileAdvancedSecurity = function (tokenID, profilename, restrictionProfileAdvancedSecurity) {
 
-    authentication.fetchEmailByTokenId(tokenID, function (email) {
-        Profile.findOne({ 'adminKeyEmail': email, 'profileArray.profileInfo.profilename': profilename }, function (err, profile) {
+    authentication.fetchIdByTokenId(tokenID, function (Id) {
+
+        //console.log('Email: ' + email + '    ' + profilename);
+        Profile.findOneAndUpdate({ 'admin': Id, 'profileInfo.profilename': profilename }, 
+                                    {'$set':{'restrictionProfile.advancedSecurity':restrictionProfileAdvancedSecurity}},
+                                     function (err, profile) {
             if (err) {
                 console.log('The error while fetching ' + err)
             }
-            if (profile.profileArray[0]) {
-                //console.log('The device onject is not null in tokenUpdates');
-                profile.profileArray[0].setRestrictionProfileAdvancedSecurity(restrictionProfileAdvancedSecurity);
+            profile.save(function (err) {
+                if (err)
+                    console.log('Error while saving restrictionProfile ' + err);
+                else {
+                    console.log('restrictionProfile SUCCESSFULY stored')
+                }
+            });
+        })
+    })
+}
+
+module.exports.setRestrictionProfileSecurity = function (tokenID, profilename, restrictionProfileSecurity) {
+
+    authentication.fetchIdByTokenId(tokenID, function (Id) {
+
+        //console.log('Email: ' + email + '    ' + profilename);
+        Profile.findOneAndUpdate({ 'admin': Id, 'profileInfo.profilename': profilename }, 
+                                    {'$set':{'restrictionProfile.security':restrictionProfileSecurity}},
+                                     function (err, profile) {
+            if (err) {
+                console.log('The error while fetching ' + err)
+            }
+            profile.save(function (err) {
+                if (err)
+                    console.log('Error while saving restrictionProfile ' + err);
+                else {
+                    console.log('restrictionProfile SUCCESSFULY stored')
+                }
+            });
+        })
+    })
+}
+
+module.exports.setCertificatepayload= function (tokenID, profilename, certificatepayload) {
+
+    authentication.fetchIdByTokenId(tokenID, function (Id) {
+        Profile.findOneAndUpdate({ 'admin': Id, 'profileInfo.profilename': profilename }, { '$set': { 'certificatepayload': certificatepayload } },
+            //{ upsert: true, new: true },
+            function (err, profile) {
+
+                if (err) {
+                    console.log('The error while fetching ' + err)
+                }
 
                 profile.save(function (err) {
                     if (err)
-                        console.log('Error while saving restrictionProfile ' + err);
+                        console.log('Error while saving certificatepayload ' + err);
                     else {
-                        console.log('restrictionProfile SUCCESSFULY stored')
-                    }
-                });
-            }
+                        console.log('certificatepayload stored')
+                }
+            });
+        })
+    })
+}
+
+module.exports.setManagedWebDomainpayload= function (tokenID, profilename, managedWebDomainpayload) {
+
+    authentication.fetchIdByTokenId(tokenID, function (Id) {
+        Profile.findOneAndUpdate({ 'admin': Id, 'profileInfo.profilename': profilename }, { '$set': { 'managedWebDomainpayload': managedWebDomainpayload } },
+            //{ upsert: true, new: true },
+            function (err, profile) {
+
+                if (err) {
+                    console.log('The error while fetching ' + err)
+                }
+
+                profile.save(function (err) {
+                    if (err)
+                        console.log('Error while saving managedWebDomainpayload ' + err);
+                    else {
+                        console.log('managedWebDomainpayload stored')
+                }
+            });
+        })
+    })
+}
+
+
+module.exports.setEmailProfile = function (tokenID, profilename, emailProfile1) {
+
+    authentication.fetchIdByTokenId(tokenID, function (Id) {
+        Profile.findOneAndUpdate({ 'admin': Id, 'profileInfo.profilename': profilename }, { '$set': { 'emailProfile': emailProfile1 } },
+            //{ upsert: true, new: true },
+            function (err, profile) {
+                console.log(JSON.stringify(profile));
+
+                if (err) {
+                    console.log('The error while fetching ' + err)
+                }
+
+                profile.save(function (err) {
+                    if (err)
+                        console.log('Error while saving emailProfile ' + err);
+                    else {
+                        console.log('emailProfile stored')
+                }
+            });
         })
     })
 }
 
 module.exports.getEmailProfile = function (tokenID, profileName, emailProfileCB) {
 
-    authentication.fetchEmailByTokenId(tokenID, function (email) {
-        Profile.findOne({ 'adminKeyEmail': email }, { '_id': 0, '__v': 0 }, function (err, profile) {
+    authentication.fetchIdByTokenId(tokenID, function (Id) {
+        Profile.findOne({ 'admin': Id, 'profileInfo.profilename': profileName}, 'emailProfile', { '_id': 0, '__v': 0 }, function (err, profile) {
             if (err) {
                 console.log('Error while getting email profile')
             } else if (!profile) {
                 console.log('Profile is null');
             } else {
 
-                var emailJson = JSON.stringify(profile.profileArray[0].emailProfile);
-                var emailParsedJson = JSON.parse(emailJson);
+                console.log(JSON.stringify(profile));
+                // var emailJson = JSON.stringify(profile.profileArray[0].emailProfile);
+                // var emailParsedJson = JSON.parse(emailJson);
 
                 emailProfileCB(emailParsedJson);
             }
@@ -241,9 +329,9 @@ module.exports.getEmailProfile = function (tokenID, profileName, emailProfileCB)
 
 module.exports.getPasscodeProfile = function (tokenID, profileName, passcodeProfileCB) {
 
-    authentication.fetchEmailByTokenId(tokenID, function (email) {
+    authentication.fetchIdByTokenId(tokenID, function (Id) {
 
-        Profile.findOne({ 'adminKeyEmail': email }, { '_id': 0, '__v': 0 }, function (err, profile) {
+        Profile.findOne({ 'admin': Id, 'profileInfo.profilename': profileName},'passcodeProfile', { '_id': 0, '__v': 0 }, function (err, profile) {
             if (err) {
                 console.log('Error while getting email profile')
             } else if (!profile) {
@@ -260,9 +348,9 @@ module.exports.getPasscodeProfile = function (tokenID, profileName, passcodeProf
 
 module.exports.getRestrictionProfile = function (tokenID, profileName, restrictionProfileCB) {
 
-    authentication.fetchEmailByTokenId(tokenID, function (email) {
+    authentication.fetchIdByTokenId(tokenID, function (Id) {
 
-        Profile.findOne({ 'adminKeyEmail': email }, { '_id': 0, '__v': 0 }, function (err, profile) {
+        Profile.findOne({'admin': Id, 'profileInfo.profilename': profileName}, 'restrictionProfile', { '_id': 0, '__v': 0 }, function (err, profile) {
             if (err) {
                 console.log('Error while getting email profile')
             } else if (!profile) {
@@ -280,68 +368,78 @@ module.exports.getRestrictionProfile = function (tokenID, profileName, restricti
 
 module.exports.getProfiles = function (tokenID, profileName, profilesCB) {
 
-    authentication.fetchEmailByTokenId(tokenID, function (email) {
+    authentication.fetchIdByTokenId(tokenID, function (Id) {
 
-        console.log('111')
-        Profile.findOne({ 'adminKeyEmail': email }, { '_id': 0, '__v': 0 }, function (err, profile) {
+        Profile.findOne({ 'admin': Id, 'profileInfo.profilename': profileName}, { '_id': 0, '__v': 0 }, function (err, profile) {
             if (err) {
                 console.log('Error while getting email profile')
             } else if (!profile) {
                 console.log('Profile is null');
             } else {
+                
+                var profileJson = JSON.stringify(profile);
+                var profileParsedJson = JSON.parse(profileJson);
+                // console.log('11')
+                // console.log(profile.profileInfo.prof)
+                // var profileIdentifierJson = JSON.stringify(profile.profileInfo);
+                // var profileIdentifierParsedJson = JSON.parse(profileIdentifierJson);
 
-                console.log('222')
+                // console.log('2')
+                // console.log(JSON.stringify(profile))
 
+                // var emailJson = JSON.stringify(profile.emailProfile);
+                // var emailParsedJson = JSON.parse(emailJson);
 
-                var profileIdentifierJson = JSON.stringify(profile.profileArray[0].profileInfo);
-                var profileIdentifierParsedJson = JSON.parse(profileIdentifierJson);
+                // console.log('3')
 
-                var emailJson = JSON.stringify(profile.profileArray[0].emailProfile);
-                var emailParsedJson = JSON.parse(emailJson);
+                // // var passcodeJson = JSON.stringify(profile.passcodeProfile);
+                // // var passcodeParsedJson = JSON.parse(passcodeJson);
 
-                var passcodeJson = JSON.stringify(profile.profileArray[0].passcodeProfile);
-                var passcodeParsedJson = JSON.parse(passcodeJson);
+                // passcodeParsedJson = null;
+                // console.log('4')
 
-                var restrictionJson = JSON.stringify(profile.profileArray[0].restrictionProfile);
-                var restrictionParsedJson = JSON.parse(restrictionJson);
+                // var restrictionJson = JSON.stringify(profile.restrictionProfile);
+                // var restrictionParsedJson = JSON.parse(restrictionJson);
 
-                var webclipJson = JSON.stringify(profile.profileArray[0].webClipProfile);
-                var webclipParsedJson = JSON.parse(webclipJson);
+                console.log('5')
 
-                profilesCB(profileIdentifierParsedJson, emailParsedJson, passcodeParsedJson,webclipParsedJson,restrictionParsedJson);
+                // var webclipJson = JSON.stringify(profile.webClipProfile);
+                // var webclipParsedJson = JSON.parse(webclipJson);
+                //webclipParsedJson = null;
+                profilesCB(profileParsedJson.profileInfo, profileParsedJson.emailProfile, profileParsedJson.passcodeProfile, profileParsedJson.webClipProfile,
+                    profileParsedJson.certificatepayload, profileParsedJson.managedWebDomainpayload, profileParsedJson.restrictionProfile);
             }
         })
     })
 }
 
-module.exports.deregisterAdmin = function(email){
-    Profile.deleteOne({'adminKeyEmail': email}, function(err){
-        if(err){
-            console.log('Error in droping the profile details of '+email)
+module.exports.deregisterAdmin = function (email) {
+    Profile.deleteOne({ 'adminKeyEmail': email }, function (err) {
+        if (err) {
+            console.log('Error in droping the profile details of ' + email)
         } else
-            console.log('Droping profile detail success for '+email)
+            console.log('Droping profile detail success for ' + email)
     })
 }
 
 module.exports.setiCloudProfile = function (tokenID, profilename, iCloudProfile) {
 
-    authentication.fetchEmailByTokenId(tokenID, function (email) {
-        Profile.findOne({ 'adminKeyEmail': email, 'profileArray.profileInfo.profilename': profilename }, function (err, profile) {
+    authentication.fetchIdByTokenId(tokenID, function (Id) {
+
+        console.log('##'+profilename+'  '+Id);
+        Profile.findOneAndUpdate({ 'admin': Id, 'profileInfo.profilename': profilename}, { '$set': { 'restrictionProfile.iCloudProfile': iCloudProfile}},function (err, profile) {
+
+            console.log('111')
             if (err) {
                 console.log('The error while fetching ' + err)
             }
-            if (profile.profileArray[0]) {
-                //console.log('The device onject is not null in tokenUpdates');
-                profile.profileArray[0].setiCloudProfile(iCloudProfile);
-
-                profile.save(function (err) {
-                    if (err)
-                        console.log('Error while saving iCloudProfile ' + err);
-                    else {
-                        console.log('iCloudProfile stored')
-                    }
-                });
-            }
+            profile.save(function (err) {
+                if (err)
+                    console.log('Error while saving iCloudProfile ' + err);
+                else {
+                    console.log('iCloudProfile stored')
+                }
+            });
         })
     })
 }
@@ -349,23 +447,18 @@ module.exports.setiCloudProfile = function (tokenID, profilename, iCloudProfile)
 module.exports.setWebClipProfile = function (tokenID, profilename, webClipProfile) {
 
 
-    authentication.fetchEmailByTokenId(tokenID, function (email) {
-        Profile.findOne({ 'adminKeyEmail': email, 'profileArray.profileInfo.profilename': profilename }, function (err, profile) {
+    authentication.fetchIdByTokenId(tokenID, function (Id) {
+        Profile.findOneAndUpdate({ 'admin': Id, 'profileInfo.profilename': profilename}, { '$set': { 'restrictionProfile.webClipProfile': webClipProfile}},function (err, profile) {
             if (err) {
                 console.log('The error while fetching ' + err)
             }
-            if (profile.profileArray[0]) {
-                //console.log('The device onject is not null in tokenUpdates');
-                profile.profileArray[0].setWebClipProfile(webClipProfile);
-
-                profile.save(function (err) {
-                    if (err)
-                        console.log('Error while saving webClipProfile ' + err);
-                    else {
-                        console.log('webClipProfile stored')
-                    }
-                });
-            }
+            profile.save(function (err) {
+                if (err)
+                    console.log('Error while saving webClipProfile ' + err);
+                else {
+                    console.log('webClipProfile stored')
+                }
+            });
         })
     })
 }
@@ -373,50 +466,105 @@ module.exports.setWebClipProfile = function (tokenID, profilename, webClipProfil
 
 module.exports.setBrowserProfile = function (tokenID, profilename, browserProfile) {
 
-    authentication.fetchEmailByTokenId(tokenID, function (email) {
-        Profile.findOne({ 'adminKeyEmail': email, 'profileArray.profileInfo.profilename': profilename }, function (err, profile) {
+    authentication.fetchIdByTokenId(tokenID, function (Id) {
+        Profile.findOneAndUpdate({ 'admin': Id, 'profileInfo.profilename': profilename}, { '$set': { 'restrictionProfile.browserProfile': browserProfile }},function (err, profile) {
             if (err) {
                 console.log('The error while fetching ' + err)
             }
-            if (profile.profileArray[0]) {
-                //console.log('The device onject is not null in tokenUpdates');
-                profile.profileArray[0].setBrowserProfile(browserProfile);
-
-                profile.save(function (err) {
-                    if (err)
+            profile.save(function (err) {
+                if (err)
                     console.log('Error while saving browserProfile ' + err);
-                    else {
-                        console.log('browserProfile stored')
-                    }
-                });
-            }
+                else {
+                    console.log('browserProfile stored')
+                }
+            });
         })
     })
 }
 
 module.exports.setNetworkProfile = function (tokenID, profilename, networkProfile) {
 
-    authentication.fetchEmailByTokenId(tokenID, function (email) {
-        Profile.findOne({ 'adminKeyEmail': email, 'profileArray.profileInfo.profilename': profilename }, function (err, profile) {
+    authentication.fetchIdByTokenId(tokenID, function (Id) {
+        Profile.findOneAndUpdate({ 'admin': Id, 'profileInfo.profilename': profilename},{ '$set': { 'restrictionProfile.networkProfile': networkProfile }}, function (err, profile) {
             if (err) {
                 console.log('The error while fetching ' + err)
             }
-            if (profile.profileArray[0]) {
-                //console.log('The device onject is not null in tokenUpdates');
-                profile.profileArray[0].setNetworkProfile(networkProfile);
-
-                profile.save(function (err) {
-                    if (err)
+            profile.save(function (err) {
+                if (err)
                     console.log('Error while saving networkProfile ' + err);
-                    else {
-                        console.log('networkProfile stored')
-                    }
-                });
-            }
+                else {
+                    console.log('networkProfile stored')
+                }
+            });
         })
     })
 }
 
+module.exports.setContentratingProfile = function (tokenID, profilename, contentRating) {
+
+    authentication.fetchIdByTokenId(tokenID, function (Id) {
+
+        //console.log('Email: ' + email + '    ' + profilename);
+        Profile.findOneAndUpdate({ 'admin': Id, 'profileInfo.profilename': profilename }, 
+                                    {'$set':{'restrictionProfile.contentRating':contentRating}},
+                                     function (err, profile) {
+            if (err) {
+                console.log('The error while fetching ' + err)
+            }
+            profile.save(function (err) {
+                if (err)
+                    console.log('Error while saving restrictionProfile ' + err);
+                else {
+                    console.log('restrictionProfile SUCCESSFULY stored')
+                }
+            });
+        })
+    })
+}
+
+module.exports.setPrivacyProfile = function (tokenID, profilename, privacy) {
+
+    authentication.fetchIdByTokenId(tokenID, function (Id) {
+
+        //console.log('Email: ' + email + '    ' + profilename);
+        Profile.findOneAndUpdate({ 'admin': Id, 'profileInfo.profilename': profilename }, 
+                                    {'$set':{'restrictionProfile.privacy':privacy}},
+                                     function (err, profile) {
+            if (err) {
+                console.log('The error while fetching ' + err)
+            }
+            profile.save(function (err) {
+                if (err)
+                    console.log('Error while saving restrictionProfile ' + err);
+                else {
+                    console.log('restrictionProfile SUCCESSFULY stored')
+                }
+            });
+        })
+    })
+}
+
+module.exports.setApplicationsProfile = function (tokenID, profilename, applications) {
+
+    authentication.fetchIdByTokenId(tokenID, function (Id) {
+
+        //console.log('Email: ' + email + '    ' + profilename);
+        Profile.findOneAndUpdate({ 'admin': Id, 'profileInfo.profilename': profilename }, 
+                                    {'$set':{'restrictionProfile.applications':applications}},
+                                     function (err, profile) {
+            if (err) {
+                console.log('The error while fetching ' + err)
+            }
+            profile.save(function (err) {
+                if (err)
+                    console.log('Error while saving restrictionProfile ' + err);
+                else {
+                    console.log('restrictionProfile SUCCESSFULY stored')
+                }
+            });
+        })
+    })
+}
 
 
 

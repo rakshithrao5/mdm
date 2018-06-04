@@ -49,6 +49,6 @@ if (constants.MICROSOFT_AZURE) {
     };
 
     var https = require('https');
-    https.createServer(options, app).listen(8080);
-
+    https.createServer(options, app).listen(3000);
+    console.log('HTTPS server created')
 }
