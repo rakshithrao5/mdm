@@ -12,6 +12,7 @@ exports.ProcessDeviceChekinCommands = function (req, res) {
 
     console.log("process Checkin Command!"+ req.body);
 
+    11
     var json = plist.parse(req.body);
     console.log("json " + json);
     if ("Authenticate" == json.MessageType) {

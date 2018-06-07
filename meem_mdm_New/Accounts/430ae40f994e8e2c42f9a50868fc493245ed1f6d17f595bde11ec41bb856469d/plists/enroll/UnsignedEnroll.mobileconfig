@@ -16,11 +16,11 @@
         <key>PayloadDisplayName</key>
         <string>Identity.p12</string>
         <key>PayloadIdentifier</key>
-        <string>com.apple.security.pkcs12.9b1b10b0-68bd-11e8-b569-93b3311a7ff1</string>
+        <string>com.apple.security.pkcs12.9a7cdd50-6a5c-11e8-99c9-77faea23f3d5</string>
         <key>PayloadType</key>
         <string>com.apple.security.pkcs12</string>
         <key>PayloadUUID</key>
-        <string>9b1b10b0-68bd-11e8-b569-93b3311a7ff1</string>
+        <string>9a7cdd50-6a5c-11e8-99c9-77faea23f3d5</string>
         <key>PayloadVersion</key>
         <integer>1</integer>
       </dict>
@@ -32,17 +32,17 @@
         <key>CheckOutWhenRemoved</key>
         <false/>
         <key>IdentityCertificateUUID</key>
-        <string>9b1b10b0-68bd-11e8-b569-93b3311a7ff1</string>
+        <string>9a7cdd50-6a5c-11e8-99c9-77faea23f3d5</string>
         <key>PayloadDescription</key>
         <string>Configures MobileDeviceManagement.</string>
         <key>PayloadIdentifier</key>
-        <string>com.apple.mdm.9b1b10b1-68bd-11e8-b569-93b3311a7ff1</string>
+        <string>com.apple.mdm.9a7cdd51-6a5c-11e8-99c9-77faea23f3d5</string>
         <key>PayloadOrganization</key>
         <string>Meem Memory Pty Ltd</string>
         <key>PayloadType</key>
         <string>com.apple.mdm</string>
         <key>PayloadUUID</key>
-        <string>9b1b10b1-68bd-11e8-b569-93b3311a7ff1</string>
+        <string>9a7cdd51-6a5c-11e8-99c9-77faea23f3d5</string>
         <key>PayloadVersion</key>
         <integer>1</integer>
         <key>ServerURL</key>
@@ -50,7 +50,7 @@
         <key>SignMessage</key>
         <false/>
         <key>Topic</key>
-        <string>com.apple.mgmt.External.a9fcd089-d8dd-484f-b34b-66879a3265ff</string>
+        <string>com.apple.mgmt.External.3f06dcf5-65ba-4847-9a65-1ab773403761</string>
         <key>UseDevelopmentAPNS</key>
         <false/>
       </dict>
@@ -58,7 +58,7 @@
     <key>PayloadDisplayName</key>
     <string>EnrollDevice</string>
     <key>PayloadIdentifier</key>
-    <string>com.apple.mgmt.External.a9fcd089-d8dd-484f-b34b-66879a3265ff</string>
+    <string>com.apple.mgmt.External.3f06dcf5-65ba-4847-9a65-1ab773403761</string>
     <key>PayloadOrganization</key>
     <string>Meem Memory Pty Ltd</string>
     <key>PayloadRemovalDisallowed</key>
@@ -66,7 +66,7 @@
     <key>PayloadType</key>
     <string>Configuration</string>
     <key>PayloadUUID</key>
-    <string>9b1b10b2-68bd-11e8-b569-93b3311a7ff1</string>
+    <string>9a7cdd52-6a5c-11e8-99c9-77faea23f3d5</string>
     <key>PayloadVersion</key>
     <integer>1</integer>
   </dict>

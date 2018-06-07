@@ -148,6 +148,7 @@ function gen_enroll_mobileconfig() {
     }else if(constants.LOCAL_SERVER){
         serverurl = constants.LOCAL.SERVERURL+"/meem/mdm/apple/server?id="+emailHash;
         checkinurl = constants.LOCAL.CHECKINURL+"/meem/mdm/apple/checkin?id="+emailHash;
+        checkouurl = constants.LOCAL.CHECKINURL+"/meem/mdm/apple/checkout?id="+emailHash
         IdentityCerPass = constants.LOCAL.IDENTITYPASSWD;
     }
 
